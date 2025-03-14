@@ -351,7 +351,6 @@ class GCG:
         # Compute the KV Cache for tokens that appear before the optimized tokens
         if config.use_prefix_cache:
             with torch.no_grad():
-                # TODO
                 output = model(inputs_embeds=before_embeds, use_cache=True)
                 # self.prefix_cache = output.past_key_values
                 self.prefix_cache = output["past_key_values"]
@@ -601,7 +600,6 @@ class GCG:
             with torch.no_grad():
                 input_embeds_batch = input_embeds[i:i + search_batch_size]
                 current_batch_size = input_embeds_batch.shape[0]
-                # TODO
                 if self.prefix_cache:
                     if not prefix_cache_batch or current_batch_size != search_batch_size:
                         # prefix_cache_batch = [[x.expand(current_batch_size, -1, -1, -1) for x in self.prefix_cache[i]] for i in range(len(self.prefix_cache))]
